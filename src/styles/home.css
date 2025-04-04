@@ -1,98 +1,161 @@
-:root {
-  --primary-color: #ff5722;
-  --secondary-color: #ff9800;
-  --dark-color: #000000;
-  --dark-color2: #fb0000;
-  --light-color: #3d3d3d;
-  --card-bg: #939393;
-  --rojo-oscuro: #252525;
-  --rojo-sombra: rgb(255, 0, 0);
-}
+/* home.css */
 
+/* Estilos base */
 body {
-  background-color: var(--dark-color);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #323232;
+  margin: 0;
+  padding: 0;
+  color: #333;
 }
 
+/* Contenedor principal */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 20px;
 }
 
+/* Título */
 .title {
   text-align: center;
-  color: var(--primary-color);
-  margin-bottom: 3rem;
+  color: #FF5722;
   font-size: 2.5rem;
+  margin-bottom: 30px;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Grid de personajes */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 25px;
+  padding: 20px;
 }
 
+/* Tarjeta de personaje */
 .card {
-  background: var(--card-bg);
+  background: rgb(0, 0, 0);
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  color: rgb(140, 205, 0);
+  box-shadow: 0 5px 15px rgba(255, 94, 0, 0.275);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px var(--rojo-sombra);
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgb(255, 0, 0);
 }
 
 .image-container {
-  width: 100%;
-  height: 350px; /* Cambia este valor a la altura deseada (ej: 250px, 300px, etc.) */
+  height: 300px; /* Altura fija pero suficiente */
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--rojo-oscuro);
-  padding: 1rem;
-  box-sizing: border-box;
-  position: relative;
+  background-color: #000000;
+  padding: 10px;
 }
 
-.image-wrapper {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.image-fit {
+.image {
   max-width: 100%;
   max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain; /* Cambiado de 'cover' a 'contain' para mostrar imágenes completas */
-  background-color: rgb(10, 3, 3);
-  border-radius: 5px;
-  padding: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  object-fit: contain; /* Muestra toda la imagen */
 }
+
+/* Para imágenes que deben mostrarse completas */
+.card[data-has-full-image="true"] .image {
+  object-fit: contain;
+  background-color: rgb(0, 0, 0);
+}
+
+.card:hover .image {
+  transform: scale(1.05);
+}
+
+/* Información del personaje */
 .character-info {
-  padding: 1.5rem;
-  background: rgb(58, 50, 50);
+  padding: 20px;
 }
 
 .character-name {
-  color: var(--dark-color2);
-  margin: 0 0 0.5rem 0;
+  color: #FF5722;
+  margin: 0 0 10px 0;
   font-size: 1.3rem;
   font-weight: 700;
 }
 
+.character-meta {
+  margin: 8px 0;
+  font-size: 0.9rem;
+  color: #e98563;
+}
 
+.character-meta:before {
+  content: "• ";
+  color: #FF5722;
+}
+
+/* Estados de carga y error */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 87, 34, 0.2);
+  border-radius: 50%;
+  border-top-color: #FF5722;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-container {
+  text-align: center;
+  padding: 50px;
+  background-color: #FFEBEE;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 50px auto;
+}
+
+.error-container h2 {
+  color: #D32F2F;
+}
+
+.error-container p {
+  color: #B71C1C;
+  font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+  }
+}

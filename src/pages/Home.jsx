@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./../styles/home.css"; // Import the CSS file for styling
+import { Link } from "react-router-dom";
 
 export const Home = () => {
   const [datos, setDatos] = useState(null);
@@ -63,6 +64,7 @@ export const Home = () => {
               {character.ki && <p className="character-meta">Ki: {character.ki}</p>}
               {character.affiliation && <p className="character-meta">Afiliación: {character.affiliation}</p>}
             </div>
+            <div className="text-center mb-1"><Link to={`/personajeEspecifico/${character.id}`}>Detalle</Link> </div>
           </div>
         ))}
       </div>
